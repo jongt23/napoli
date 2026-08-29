@@ -1,1 +1,967 @@
-const w=b;(function(g,h){const t=b,i=g();while(!![]){try{const j=-parseInt(t(0x2a8))/0x1*(-parseInt(t(0x23b))/0x2)+-parseInt(t(0x200))/0x3*(parseInt(t(0x284))/0x4)+parseInt(t(0x22c))/0x5*(parseInt(t(0x297))/0x6)+-parseInt(t(0x1d4))/0x7*(-parseInt(t(0x206))/0x8)+-parseInt(t(0x22e))/0x9*(-parseInt(t(0x29d))/0xa)+-parseInt(t(0x26c))/0xb+-parseInt(t(0x28b))/0xc*(parseInt(t(0x2a6))/0xd);if(j===h)break;else i['push'](i['shift']());}catch(k){i['push'](i['shift']());}}}(a,0xc24d8));import{db}from'./firebase.js';import{ref,get,onValue,query,orderByChild,startAt,endAt,set as c,push as d,remove as e,update as f}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';const checkAndTouchMenu=g=>{const u=b;if(!g)return;const h=g[u(0x244)]();(h[u(0x1dd)](u(0x264))||h[u(0x1dd)](u(0x1d5))||h['includes'](u(0x247))||h[u(0x1dd)]('categorias'))&&c(ref(db,'config/menu_version'),Date[u(0x293)]())['catch'](i=>console[u(0x202)](i));},set=(g,h)=>{const i=c(g,h);return checkAndTouchMenu(g),i;},push=(g,h)=>{const i=d(g,h);return checkAndTouchMenu(g),i;},remove=g=>{const h=e(g);return checkAndTouchMenu(g),h;},update=(g,h)=>{const v=b,i=f(g,h);if(h&&typeof h===v(0x1e8)){const j=Object[v(0x229)](h);j[v(0x222)](l=>l[v(0x27b)](v(0x247))||l[v(0x27b)]('categorias'))&&c(ref(db,v(0x2b9)),Date[v(0x293)]())[v(0x2ad)](k=>console['error'](k));}return checkAndTouchMenu(g),i;};let passwordCorrecta='',pinBuffer='',categoriasData={},cartaData={},seguridadData={};const PIN_SESSION_KEY=w(0x1db),pinScreen=document[w(0x251)](w(0x20a)),appShell=document['getElementById'](w(0x2b1)),pinDots=[document[w(0x251)]('pd0'),document[w(0x251)]('pd1'),document['getElementById'](w(0x275)),document[w(0x251)](w(0x208))],pinErrorMsg=document[w(0x251)](w(0x21a));function a(){const aH=['ywjYAxjnB2rHBe51zxzVqxj0Awn1Bg8','C2HVDW','tM9TyNjLigrLBcbNCNvWBYaOzwO6ifbYAw1LCM9ZlcbtzwD1BMrVCYWGug9ZDhjLCYK6','Dgv4Dc1SB2DPBI1JB250ywLUzxi','zwXPBwLUyxjwyxjPyw50zufYDgLJDwXV','twvUC2fQzq','Dg9tDhjPBMC','lNbPBI1KB3rZ','ChjLy2LV','y2fYDge','pc9KAxy+cIaGicaGicaGicaGicaGpgrPDIbJBgfZCZ0Iyxj0lxbYAwnLiJ4','DMfS','q2f0zwDVCSoTysbLBgLTAw5Hzge','AxnbCNjHEq','zgLZCg9UAwjSzq','WR9ezxnLyxmGzwXPBwLUyxiGzxn0zsbNCNvWBYbKzwWGy29TyM8/','pUkgKZWVyNv0Dg9UpGOGicaGicaGicaGicaGidXIDxr0B24Gy2XHC3m9iMj0BI1LzgL0lwfYDciGB25JBgLJAZ0ID2LUzg93lMfICMLYrhjHD2vYrwrPDefYDcGN','rxjYB3iGywWGy3jLyxiGyxj0W61JDwXV','C29YDa','z2v0rwXLBwvUDej5swq','DMfYAwfUDgvZ','ksiGC3r5Bgu9iMzVBNqTC2L6ztOXnNb4o2nVBg9YoNzHCIGTlwrHBMDLCIK7yMfJA2DYB3vUzdPUB25Lo2jVCMrLCJPUB25Lo2n1CNnVCJPWB2LUDgvYoYi+jNrPBwvZoZWVyNv0Dg9UpGOGicaGica8l2rPDJ4kicaGicaGpgrPDIbZDhLSzt0IzgLZCgXHEtPMBgv4o2zSzxGTzgLYzwn0Aw9UoMnVBhvTBJTNyxa6nhb4iJ4kicaGicaGica','y2HLy2TLza','y3vZDg9Tlw1VzgfSlxrPDgXL','y3vZDg9Tlw1VzgfS','Dg9HC3q','ksiGC3r5Bgu9iMzVBNqTC2L6ztOXnhb4o2nVBg9YoNzHCIGTlwrHBMDLCIK7yMfJA2DYB3vUzdPUB25Lo2jVCMrLCJPUB25Lo2n1CNnVCJPWB2LUDgvYoYi+jNrPBwvZoZWVyNv0Dg9UpGOGicaGicaGicaGica8l2rPDJ4kicaGicaGicaGia','A2v5','BM90yxnqCMvKzwzPBMLKyxm','zwXPBwLUyxjwyxjPyw50zunHDgvNB3jPyq','BMv3lxzHCI1UB21ICMu','iJ8Gu2uGyM9YCMfYW6fUihrVzg9ZigXVCYbHCNtdRwn1Bg9ZigfZB2nPywrVCY4','BM9Uzq','zwXPBwLUyxjpCgnPB25dB21IB01VDMLS','zM9JDxm','DhjPBq','qxj0W61JDwXVignYzwfKBW','zw5JyxjNywrVugfZC3DVCMq','l2nHCNrH','BMv3lwnHDc12yxiTChjLy2LV','Bw92zxjbCNq','y2f0lxzHCMLHBNrLCY1SAxn0','zw5JyxjNywrVqwnJzxnPyMXL','pc9ZCgfUpGOGicaGicaGicaGpc9KAxy+cIaGicaGicaGica8zgL2ignSyxnZpsjJyxqTywn0Aw9UCYiGB25JBgLJAZ0IzxzLBNqUC3rVCfbYB3bHz2f0Aw9UkcKIpGOGicaGicaGicaGica8yNv0Dg9UignSyxnZpsjIDg4Ty2f0lwvKAxqIihrPDgXLpsjtDwjPCIbJyxrLz29YW61HiIbVBMnSAwnRpsjTB3zLCKnHDcGN','AM9PBG','zwrPDc1HCNqTChjLy2LV','nZqWmZiWouzPAK9yzq','C3vWBgvTzw50BW','zwrPDc1HCNqTBM90yxm','sw50CM9KDwnLigvSig5VBwjYzsbKzwWGyxj0W61JDwXVoG','B3jKzw4','y29UzMLNl2XVy2fS','zwrPDc1HCNqTywn0AxzV','zw5JyxjNywrVmtiZna','C3bSAwnL','CgqY','l25VDgfZuhjLzgvMAw5PzgfZ','y29TyM8TC3vWBc1PBNb1Dc1TB3zPBc0','B3zLCMXHEs1LzgL0lwnHDa','Dg9gAxHLza','qxj0W61JDwXVigvSAw1PBMfKBW','C3rHCNrZv2L0Aa','cIaGicaGicaGica8zgL2ignSyxnZpsjHCNqTAxrLBsa','jYKIpGOGicaGicaGicaGpgrPDIbJBgfZCZ0Iy2f0lxrPDgXLlxDYyxaIpGOGicaGicaGicaGica8C3bHBIbJBgfZCZ0Iy2f0lwnOzxzYB24IpUkwTJWVC3bHBJ4kicaGicaGicaGicaGphnWyw4Gy2XHC3m9iMnHDc10AxrSzsi+','jYWGjW','B25RzxLKB3DU','y2vYCMfYu2vZAw9U','pgrPDIbZDhLSzt0IDgv4Dc1HBgLNBJPJzw50zxi7y29SB3i6DMfYkc0TDgv4Dc1KAw0Po3bHzgrPBMC6mJrWEdSIpK5VigHHEsbJyxrLz29YW61HCYbJCMvHzgfZlIbqDwXZysaIkYiGCgfYysbHW7fHzgLYihvUys48l2rPDJ4','CxvLCNLtzwXLy3rVCG','CgLUlwrVDa','nhzlu01Wzq','BMv3lxzHCI1WCMvJAw8','y29TyM8Tz3jVDxbZlwXPC3rHlw1VDMLS','iokcRcK8l29WDgLVBJ4','ywXLCNq','BgvUz3rO','CMvWBgfJzvDPDgG','mtjrrvHtv2i','y2f0zwDVCMLHCW','rxjYB3iGywWGy3jLyxiGy2f0zwDVCSoTyq','l29YzgvU','pgrPDIbZDhLSzt0IDgv4Dc1HBgLNBJPJzw50zxi7zM9UDc1ZAxPLoJeYChG7y29SB3i6DMfYkc0TDgv4Dc1KAw0Po3bHzgrPBMC6mtbWEcaWoYi+q2f0zwDVCSoTysb2ywpdRweUpc9KAxy+','y2f0zwDVCMLHCY8','ksiGC3r5Bgu9iNbHzgrPBMC6mca4ChG7zM9UDc1ZAxPLoJeXChG7AgvPz2H0oJmWChG7yMfJA2DYB3vUzdP2yxiOls1Hy2nLBNqPo2nVBg9YoNDOAxrLo2jVCMrLCI1JB2XVCJP2yxiOls1Hy2nLBNqPoYi+kYbbW7fHzgLYpc9IDxr0B24+cIaGicaGidWVzgL2pGOGicaGpc9KAxy+cIaG','Bw92zxjdyxq','BM93','zMXLEa','q2f0zwDVCSoTysbNDwfYzgfKyq','lcaTmsKIia','mtGZndu4nhDgBhvIyW','zgf0yxnLDa','pc9ZCgfUpGOGicaGicaGicaGicaGidXIDxr0B24Gy2XHC3m9iMj0BI1JBg9Zzs1KCMf3zxiIig9Uy2XPy2S9iNDPBMrVDY5LBgLTAw5HCK9Wy2LVBKnVBwjVtw92AwWO','lMLUzM8Vy29UBMvJDgvK','B3zLCMXHEs1JDxn0B20TBw9KywW','C2XPy2u','nJGWDLDIs0nz','zwrPDc1JyxqTBM9TyNjL','zMLSDgvY','Dg9Nz2XLqwnJB3jKAw9U','CMvSB2fK','yNrUlwvUDhjHCI10zxH0BW','C3r5Bgu','jYKIpUkAMtWVyNv0Dg9UpGOGicaGicaGicaGpc9KAxy+cIaGicaGicaGpc9KAxy+cIaGicaGicaGpgrPDIbJBgfZCZ0Iy2f0lwnVBNrLBNqIpGOGicaGicaGicaGpgrPDIbJBgfZCZ0Iyxj0lwXPC3qIpGOGicaGicaGicaGica','y2XPy2S','odi2mJGXm2TntK5RzG','phnWyw4GC3r5Bgu9iMnVBg9YoNzHCIGTlxrLEhqTzgLTksi+u2LUihn1CgWUpc9ZCgfUpG','m0jlt01pyG','cIaGicaGicaGicaGidXKAxyGC3r5Bgu9iMrPC3bSyxK6zMXLEdTQDxn0Awz5lwnVBNrLBNq6C3bHy2uTyMv0D2vLBJTHBgLNBI1PDgvTCZPJzw50zxi7zM9UDc1ZAxPLoJeYChG7CgfKzgLUzZOYChGGmci+cIaGicaGicaGicaGicaGphnWyw4+','zgLZCgXHEq','rxjYB3iGywWGz3vHCMrHCIbJyxrLz29YW61H','u2vSzwnJACoZBG','y2f0y2G','lcaXksiG','B25JBgLJAW','y29TyM9hCM91Chm','yxbWlxnOzwXS','cIaGicaGicaGpc9ZzwXLy3q+cIaGicaGicaGpgLUChv0ihr5Cgu9iM51BwjLCIiGAwq9iMnVBwjVlxn1CgWTAw5WDxqTBw92AwWT','q2f0zwDVCSoTysbJCMvHzge','WR9tzwD1CM8GCxvLigrLC2vHCYbLBgLTAw5HCIbSysbJyxrLz29YW61Hici','y29TyM8Tyxj0lxnLBgvJDc1TB3zPBc0','rw5JyxjNywrV','y2XVBMvoB2rL','z2v0sxrLBq','y29UzMLNl21LBNvFDMvYC2LVBG','WR9tzwD1CM8GCxvLigrLC2vHCYbLBgLTAw5HCIbLBcbHCNtdRwn1Bg8GiG','y2XHC3noyw1L','y3vZDg9Tlw1VzgfSlw1LC3nHz2u','yMXVy2S','z3vHCMrHCKfYDgLJDwXVq2fYDge','rw50zxi','mZvJrvHqsLu','l2nHDgvNB3jPyxm','y29UzMLNl3nLz3vYAwrHza','igzPBgXLza','zwrPDc1JyxqTAwq','zgvS','z3jPza','zw5JyxjNywrVx2f1DgHFC2vZC2LVBG','cIaGicaGidXKAxyGy2XHC3m9iMnHDc1Hy2nVCMrPB24G','Aw5JBhvKzxm','Bg9JywWTDgL0Bgu','zgLZywjSzwq','pgrPDIbZDhLSzt0IzM9UDc1ZAxPLoJeYChG7y29SB3i6DMfYkc0TDgv4Dc1KAw0Po3rLEhqTywXPz246y2vUDgvYoYi+u2LUihzHCMLHBNrLCYbLC3bLy8oTzMLJyxmUpc9KAxy+','tNvLDM8Gqxj0W61JDwXV','y29JAw5H','cIaGica8zgL2ihn0EwXLpsjIywnRz3jVDw5KoNzHCIGTlxbHBMvSlwXPz2H0ktTIB3jKzxi6mxb4ihnVBgLKihzHCIGTlwjVCMrLCIK7yM9YzgvYlxjHzgL1CZO4ChG7CgfKzgLUzZO4ChG7zgLZCgXHEtPMBgv4o2zSzxGTzgLYzwn0Aw9UoMnVBhvTBJTNyxa6nNb4o21HCMDPBI1IB3r0B206nNb4iJ4kicaGicaGpgrPDIbZDhLSzt0IzgLZCgXHEtPMBgv4o2P1C3rPzNKTy29UDgvUDdPZCgfJzs1Izxr3zwvUo2fSAwDUlwL0zw1ZoMnLBNrLCJTIB3jKzxiTyM90Dg9ToJfWEcbZB2XPzcb2yxiOls1IB3jKzxiPo3bHzgrPBMCTyM90Dg9ToJrWEci+cIaGicaGicaGphnWyw4GC3r5Bgu9iMzVBNqTD2vPz2H0oMjVBgq7zM9UDc1ZAxPLoJeYChG7y29SB3i6DMfYkc0TDgv4DcKIpKDYDxbVoIa','igvYCM9Y','q29UDhjHC2xdSweGsw5JB3jYzwn0yq','Aw5Hy3rPDMu','iIbJBgfZCZ0IzM9YBs1PBNb1DciGC3r5Bgu9iMzSzxG6mtTMB250lxnPEMu6mtfWEdTOzwLNAhq6mZbWEdTWywrKAw5NoJjWEca2ChG7iJ4kicaGicaGicaGidXVChrPB24GDMfSDwu9iIi+4OcuifnLBgvJy2LVBMfYigfYDmoTy3vSBYdIGjq8l29WDgLVBJ4kicaGicaGicaGia','B2jQzwn0','sw50CM9KDwnLihvUig5VBwjYzsbKzsb2yxjPyw50zq','iJ4kicaGicaGica8zgL2ignSyxnZpsjJyxqTAgvHzgvYiIbVBMnSAwnRpsj3Aw5KB3CUDg9Nz2XLqwnJB3jKAw9UkcC','zwrPDc1HCNqTzgvZDgLUBW','AgfZt3DUuhjVCgvYDhK','BwfW','y29TyM8TCgfUzwWTBw92AwW','ywrKrxzLBNrmAxn0zw5LCG','C2v0sxrLBq','yxj0swq','Bg9JywXLq29TCgfYzq','B3zLCMXHEs1LzgL0lwfYDa','CgLUlxbHza','zhjHD2vYlwvKAxqTyxj0','ksi+jNrPBwvZoZWVyNv0Dg9UpGOGicaGpc9KAxy+cIaG','zw50CMLLCW','BMv3lwnHDc12yxiTBM9TyNjL','ywDYzwDHCLzHCMLHBNrLq2f0zwDVCMLH','zwXPBwLUyxjbCNrPy3vSB0nHCNrH','pgiGC3r5Bgu9iMnVBg9YoNzHCIGTlwfJy2vUDdiPiJ4R','iokcRdWVzgL2pGOGicaGicaGicaGica8l2rPDJ4kicaGicaGicaGicaGpgrPDIbJBgfZCZ0Iyxj0lwfJDgLVBNmIpGOGicaGicaGicaGicaGidXIDxr0B24Gy2XHC3m9iMj0BI1LzgL0lwfYDciGDgL0Bgu9iLn1yMLYigfYDmoTy3vSBYiGB25JBgLJAZ0IBw92zxjbCNqOjW','y2XHC3nmAxn0','CMvTB3zL','CMvTB3zLsxrLBq','mJe2mZe1m3vNAe9HtW','tNvLDM8Gr3j1Cg8','zxjYB3i','DMfSDwu','y2vYCMfYrhjHD2vYrwrPDenHDa','AxrLBxm','nJe1odq4v3PJwNnN','Dg9Nz2XL','CgqZ','rxjYB3iGywWGzwXPBwLUyxiGyxj0W61JDwXV','CgLUlxnJCMvLBG','ywDYzwDHCLzHCMLHBNrLqxj0Awn1Bg8','rwXPBwLUyxiGqxj0W61JDwXV','mtiZna','Bwf4','pgrPDIbZDhLSzt0IzM9UDc1ZAxPLoJeYChG7y29SB3i6DMfYkc0TDgv4Dc1KAw0Po3rLEhqTywXPz246y2vUDgvYoYi+u2LUigDYDxbVCYbKzsbZzwXLy2nPW7nUigfNCMvNywrVCY48l2rPDJ4','4OkSktWVC3bHBJ4kicaGicaGpgj1DhrVBIbJBgfZCZ0IyNrUlwnSB3nLlwrYyxDLCIiGC3r5Bgu9iMzVBNqTC2L6ztOXnNb4o2nVBg9YoNzHCIGTlwrHBMDLCIK7yMfJA2DYB3vUzdPUB25Lo2jVCMrLCJPUB25Lo2n1CNnVCJPWB2LUDgvYoYiGB25JBgLJAZ0ID2LUzg93lMvSAw1PBMfYvMfYAwfUDgvdyxrLz29YAweO','zwrPDc1HCNqTzxnJB21IBW','Aw5Uzxjive1m','ic0Gq2fYDge','C3rHDhvZlwrVDa','cIaGicaGidWVzgL2pGOGicaGica8zgL2ihn0EwXLpsjKAxnWBgf5oMzSzxG7z2fWoJrWEdTTyxjNAw4TDg9WoJrWEdTHBgLNBI1PDgvTCZPJzw50zxiIpGOGicaGicaGidXZzwXLy3qGAwq9iMnVBwjVlwfYDc1ZzwXLy3qTBw92AwWT','zM9YrwfJAa','y3vZDg9Tlw1VzgfSlwj0BI1VAW','zwXPBwLUyxjdyxrLz29YAwfdyxj0yq','DMfSDwvZ','CgLUlwvYCM9Y','pUkgKZWVyNv0Dg9UpGOGicaGicaGicaGica8yNv0Dg9UignSyxnZpsjIDg4Ty2f0lwvKAxqIig9Uy2XPy2S9iNDPBMrVDY5HyNjPCKrYyxDLCKvKAxrdyxqOjW','zwrPDc1HCNqTBM9TyNjL','qwnLChrHCG','zwrPDc1HCNqTAwq','ChvZAa','ywjYAxjeCMf3zxjfzgL0qxj0','y2fYDgeV','C29Tzq','rwWGBM9TyNjLig5Vihb1zwrLigvZDgfYihzHy8oTBW','zwrPDc1JyxqTBM90yxm','zwXPBwLUyxjhCNvWB0nVBwjVtw92AwW','DgvZDa','Dgv4DenVBNrLBNq','y3vZDg9Tlw1VzgfSlwj0BI1Jyw5JzwW','A2v5CW','y2f0swq','pc9ZCgfUpGOGicaGicaGidXIDxr0B24Gy2XHC3m9iMj0BI1JBg9Zzs1KCMf3zxiIig9Uy2XPy2S9iNDPBMrVDY5LBgLTAw5HCKDYDxbVq29TyM9nB3zPBcG','mJvLAvvxree','tNvLDMeGq2f0zwDVCSoTyq','mte1nJuWAKL5DeD1','iIbPzd0Iy2f0lwfJyY0','BM9TyNjL','rwXPz2uGDw4Gyxj0W61JDwXV','jYWG','pUkgKtWVyNv0Dg9UpGOGicaGicaGicaGica8yNv0Dg9UignSyxnZpsjIDg4Ty2f0lwvKAxqIihrPDgXLpsjcywPHCIbJyxrLz29YW61HiIbVBMnSAwnRpsjTB3zLCKnHDcGN','y3vZDg9Tlw1VzgfSlwLUChv0','ywrK','Bg9JyxrPB24','y2vYCMfYq3vZDg9Ttw9KywW','zgvZDgLUBW','iJ4kicaGicaGica','B3bLBG','mJuZndbRCMHKzKK','cIaGica8zgL2ihn0EwXLpsjKAxnWBgf5oIbMBgv4oYbHBgLNBI1PDgvTCZOGy2vUDgvYoYbQDxn0Awz5lwnVBNrLBNq6ihnWywnLlwjLDhDLzw47ihbHzgrPBMC6idzWEcaXmhb4oYbIywnRz3jVDw5KoIbYz2jHkdi1nsWYntuSmJu1ldaUmdmPoYbIB3jKzxi6idfWEcbZB2XPzcb2yxiOls1IB3jKzxiPoYbIB3jKzxiTCMfKAxvZoIa2ChG7iJ4kicaGicaGphnWyw4GC3r5Bgu9iMzVBNqTC2L6ztOXm3b4oYi+','BMv0D29YAY1ZDgf0Dxm'];a=function(){return aH;};return a();}async function init(){const y=w;onValue(ref(db,'config/seguridad'),g=>{const x=b;seguridadData=g[x(0x249)]()||{},passwordCorrecta=seguridadData[x(0x263)]?String(seguridadData[x(0x263)])[x(0x261)]():x(0x273),sessionStorage[x(0x2b8)](PIN_SESSION_KEY)==='1'&&seguridadData[x(0x268)]===![]&&cerrarSesion();});try{const g=await get(ref(db,y(0x1d6))),h=g[y(0x249)]()||{};passwordCorrecta=h[y(0x263)]?String(h['encargadoPassword'])[y(0x261)]():'encargado1234';}catch(i){passwordCorrecta=y(0x273);}if(sessionStorage[y(0x2b8)](PIN_SESSION_KEY)==='1')desbloquearPanel();else{const j=/^\d{4}$/[y(0x226)](passwordCorrecta)||passwordCorrecta==='encargado1234';j?(document[y(0x282)]('.pin-dots')[y(0x2a3)][y(0x2aa)]=y(0x294),document[y(0x251)]('pin-pad')[y(0x2a3)][y(0x2aa)]=y(0x1da),document['getElementById'](y(0x241))[y(0x2a3)][y(0x2aa)]='none',configurarTecladoPin()):(document[y(0x282)](y(0x245))[y(0x2a3)]['display']='none',document[y(0x251)](y(0x1f4))[y(0x2a3)][y(0x2aa)]=y(0x25e),document[y(0x251)]('text-login-container')['style']['display']=y(0x294),configurarTecladoTexto());}}function configurarTecladoPin(){const z=w,g=document[z(0x251)](z(0x1f4));g[z(0x28a)](g[z(0x2b7)](!![])),document[z(0x251)](z(0x1f4))[z(0x1ef)](z(0x2a5),h=>{const A=z,i=h['target']['closest']('[data-k]');if(!i)return;const j=i[A(0x298)]['k'];if(j===A(0x1d9))pinBuffer=pinBuffer[A(0x29c)](0x0,-0x1),actualizarDots();else{if(j!==''){if(pinBuffer['length']>=0x4)return;pinBuffer+=j,actualizarDots(),pinBuffer[A(0x289)]===0x4&&verificarPin();}}});}function configurarTecladoTexto(){const B=w,g=document['getElementById'](B(0x2a2)),h=document['getElementById']('text-pin-input');g[B(0x2af)]=()=>{const C=B,i=h[C(0x203)][C(0x261)]();i===passwordCorrecta?verificarYEntrar():(pinErrorMsg[C(0x227)]=C(0x1e5),h['value']='',setTimeout(()=>{const D=C;pinErrorMsg[D(0x227)]='';},0x5dc));},h[B(0x27f)]=i=>{const E=B;i[E(0x259)]===E(0x1d3)&&g['click']();};}function actualizarDots(g=![]){const F=w;pinDots[F(0x216)]((h,i)=>{const G=F;h[G(0x1cf)]=G(0x283)+(i<pinBuffer[G(0x289)]?g?G(0x1e4):G(0x1d7):'');});}async function verificarPin(){const H=w,g=pinBuffer===passwordCorrecta||passwordCorrecta===H(0x273)&&pinBuffer===H(0x20d);g?verificarYEntrar():(actualizarDots(!![]),pinErrorMsg[H(0x227)]='PIN\x20Incorrecto',setTimeout(()=>{const I=H;pinBuffer='',actualizarDots(),pinErrorMsg[I(0x227)]='';},0x3e8));}async function verificarYEntrar(){const J=w;try{const g=await get(ref(db,J(0x1d6))),h=g['val']()||{};if(h['encargadoAccesible']===![]){pinErrorMsg[J(0x227)]='Acceso\x20desactivado\x20por\x20gerencia',pinBuffer='',actualizarDots();return;}}catch(i){console[J(0x202)](i);}iniciarSesionExitosa();}function iniciarSesionExitosa(){const K=w;sessionStorage[K(0x1f0)](PIN_SESSION_KEY,'1'),desbloquearPanel();}function desbloquearPanel(){const L=w;pinScreen[L(0x2a3)][L(0x2aa)]=L(0x25e),appShell['style'][L(0x2aa)]='flex',conectarListeners();}function cerrarSesion(){const M=w;sessionStorage[M(0x1ff)](PIN_SESSION_KEY),window[M(0x236)][M(0x2a1)]();}function conectarListeners(){const N=w,g=document[N(0x251)](N(0x23d));onValue(ref(db,N(0x29a)),h=>{const O=N;h['val']()===!![]?g[O(0x1cf)]='status-dot\x20connected':g[O(0x1cf)]=O(0x214);}),onValue(ref(db,N(0x271)),h=>{const P=N,i=h[P(0x249)]()||{};document[P(0x251)](P(0x1de))[P(0x227)]=(i['nombre']||P(0x2b6))+P(0x213);}),onValue(ref(db,N(0x28c)),h=>{const Q=N;categoriasData=h[Q(0x249)]()||{},renderCarta();}),onValue(ref(db,N(0x247)),h=>{const R=N;cartaData=h[R(0x249)]()||{},renderCarta();});}let accordionState={};function renderCarta(){const S=w,g=document[S(0x251)]('carta-accordion');if(!g)return;if(Object[S(0x229)](categoriasData)['length']===0x0){g[S(0x212)]=S(0x281);return;}const h=Object['entries'](categoriasData)[S(0x250)]((i,j)=>{const T=S;return(i[0x1][T(0x270)]??0x3e7)-(j[0x1][T(0x270)]??0x3e7)||(i[0x1][T(0x230)]||'')['localeCompare'](j[0x1][T(0x230)]||'');});g['innerHTML']=h[S(0x1ed)](([i,j],k)=>{const U=S,l=accordionState[i]===!![],m=Object[U(0x1f7)](cartaData)[U(0x29f)](([o,p])=>p['catId']===i)[U(0x250)]((o,p)=>(o[0x1][U(0x270)]||0x0)-(p[0x1][U(0x270)]||0x0)||(o[0x1]['nombre']||'')[U(0x1f2)](p[0x1][U(0x230)]||'')),n=m[U(0x289)]>0x0?m['map'](([o,p],q)=>U(0x27c)+(p[U(0x24c)]===![]?U(0x1e6):'')+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22art-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22art-name\x22>'+p[U(0x230)]+U(0x248)+Number(p[U(0x246)]||0x0)[U(0x279)](0x2)+U(0x1fc)+o+U(0x27e)+i+U(0x232)+q+U(0x296)+(q===0x0?U(0x1df):'')+'>↑</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-edit-art\x22\x20title=\x22Bajar\x20artículo\x22\x20onclick=\x22moverArt(\x27'+o+U(0x27e)+i+'\x27,\x20'+q+U(0x2ae)+(q===m['length']-0x1?U(0x1df):'')+U(0x24e)+i+'\x27,\x20\x27'+o+'\x27)\x22>Editar</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20')['join'](''):U(0x28f);return U(0x1dc)+(l?'open':'')+U(0x22f)+i+U(0x1ea)+i+U(0x27d)+j[U(0x230)]+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22cat-badge\x22>'+m['length']+U(0x269)+i+U(0x232)+k+U(0x296)+(k===0x0?'disabled':'')+U(0x233)+i+U(0x232)+k+U(0x2ae)+(k===h[U(0x289)]-0x1?U(0x1df):'')+U(0x21b)+i+U(0x2a4)+n+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-edit-art\x22\x20style=\x22margin-top:4px;width:100%;height:36px;border-style:dashed;\x22\x20onclick=\x22window.abrirModalNuevoArticulo(\x27'+i+'\x27)\x22>+\x20Añadir\x20Artículo</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20';})['join']('');}function toggleAccordion(g){const V=w;accordionState[g]=!accordionState[g];const h=document[V(0x251)]('cat-acc-'+g);h&&h[V(0x1fd)][V(0x207)]('open',accordionState[g]);}function abrirDrawerEditCat(g){const W=w,h=categoriasData[g];if(!h)return;document[W(0x251)](W(0x1d8))[W(0x203)]=g,document[W(0x251)](W(0x29e))['value']=h[W(0x230)]||'',document[W(0x251)](W(0x224))[W(0x203)]=h[W(0x25a)]||'',renderVariantesCat(h[W(0x252)]||[]),document[W(0x251)](W(0x278))[W(0x1fd)]['add'](W(0x23a)),document[W(0x251)]('drawer-edit-cat')[W(0x1fd)][W(0x235)](W(0x23a));}function cerrarDrawerEditCat(){const X=w;document['getElementById']('overlay-edit-cat')['classList'][X(0x1fe)]('open'),document['getElementById']('drawer-edit-cat')['classList'][X(0x1fe)](X(0x23a));}let tempVariantesCat=[];function b(c,d){c=c-0x1ce;const e=a();let f=e[c];if(b['hxKBNF']===undefined){var g=function(l){const m='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let n='',o='';for(let p=0x0,q,r,s=0x0;r=l['charAt'](s++);~r&&(q=p%0x4?q*0x40+r:r,p++%0x4)?n+=String['fromCharCode'](0xff&q>>(-0x2*p&0x6)):0x0){r=m['indexOf'](r);}for(let t=0x0,u=n['length'];t<u;t++){o+='%'+('00'+n['charCodeAt'](t)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(o);};b['FpjkVG']=g,b['EWBEWZ']={},b['hxKBNF']=!![];}const h=e[0x0],i=c+h,j=b['EWBEWZ'][i];return!j?(f=b['FpjkVG'](f),b['EWBEWZ'][i]=f):f=j,f;}function renderVariantesCat(g){const Y=w;tempVariantesCat=[...g];const h=document[Y(0x251)](Y(0x267));if(!h)return;if(tempVariantesCat[Y(0x289)]===0x0){h[Y(0x212)]='<div\x20style=\x22font-size:12px;color:var(--text-dim);text-align:center;\x22>Sin\x20variantes\x20configuradas.</div>';return;}h[Y(0x212)]=tempVariantesCat[Y(0x1ed)]((i,j)=>Y(0x23c)+i[Y(0x230)]+'\x20('+(Number(i[Y(0x246)]||0x0)>=0x0?'+':'')+Number(i[Y(0x246)]||0x0)[Y(0x279)](0x2)+Y(0x210)+j+')\x22>&times;</button>\x0a\x20\x20\x20\x20</div>\x0a\x20\x20')[Y(0x26a)]('');}function agregarVarianteCategoria(){const Z=w,g=document['getElementById'](Z(0x1f8))['value']['trim'](),h=parseFloat(document[Z(0x251)](Z(0x265))[Z(0x203)])||0x0;if(!g){toast(Z(0x1e9));return;}tempVariantesCat[Z(0x21f)]({'nombre':g,'precio':h}),document['getElementById']('new-cat-var-nombre')[Z(0x203)]='',document[Z(0x251)](Z(0x265))[Z(0x203)]='',renderVariantesCat(tempVariantesCat);}function eliminarVarianteCategoria(g){const a0=w;tempVariantesCat[a0(0x274)](g,0x1),renderVariantesCat(tempVariantesCat);}async function abrirModalNuevaCategoria(){const a1=w;showCustomPrompt(a1(0x22d),'Introduce\x20el\x20nombre\x20de\x20la\x20categoría:',async g=>{const a2=a1;if(!g||!g[a2(0x261)]())return;try{const h=Object[a2(0x219)](categoriasData)['reduce']((j,k)=>Math[a2(0x20e)](j,k[a2(0x270)]||0x0),0x0),i=push(ref(db,a2(0x28c)),{'nombre':g[a2(0x261)](),'orden':h+0x1});toast(a2(0x2b3)),setTimeout(()=>abrirDrawerEditCat(i[a2(0x259)]),0x12c);}catch(j){toast(a2(0x28d));}});}async function guardarCategoriaCarta(){const a3=w,g=document[a3(0x251)]('edit-cat-id')['value'],h=document['getElementById'](a3(0x29e))[a3(0x203)][a3(0x261)](),i=document[a3(0x251)](a3(0x224))['value'][a3(0x261)]()||null;if(!h){toast('El\x20nombre\x20no\x20puede\x20estar\x20vacío');return;}const j=categoriasData[g]||{},k={...j,'nombre':h,'variantes':tempVariantesCat,'notasPredefinidas':i};try{await set(ref(db,a3(0x290)+g),k),!i&&await remove(ref(db,a3(0x290)+g+'/notasPredefinidas')),toast(a3(0x295)),cerrarDrawerEditCat();}catch(l){toast(a3(0x2ab));}}async function eliminarCategoriaCarta(){const a4=w,g=document[a4(0x251)](a4(0x1d8))[a4(0x203)],h=categoriasData[g];if(!h)return;showCustomConfirm('Eliminar\x20Categoría',a4(0x2b4)+h[a4(0x230)]+a4(0x25d),async i=>{const a5=a4;if(!i)return;try{const j=Object[a5(0x229)](cartaData)[a5(0x29f)](k=>cartaData[k]['catId']===g);for(const k of j){await remove(ref(db,a5(0x221)+k));}await remove(ref(db,'categorias/'+g)),toast(a5(0x24a)),cerrarDrawerEditCat();}catch(l){toast('Error\x20al\x20eliminar\x20categoría');}});}let tempVariantesArt=[],tempComboGroups=[];function abrirDrawerEditArt(g,h){const a6=w,i=cartaData[h];if(!i)return;document[a6(0x251)]('edit-art-id')['value']=h,document[a6(0x251)]('edit-art-cat-id')['value']=g,document['getElementById']('edit-art-nombre')['value']=i['nombre']||'',document[a6(0x251)](a6(0x26b))[a6(0x203)]=i['precio']!=null?i[a6(0x246)]:'',document['getElementById']('edit-art-destino')[a6(0x203)]=i[a6(0x238)]||a6(0x1e2),document[a6(0x251)]('edit-art-activo')[a6(0x254)]=i[a6(0x24c)]!==![],document['getElementById']('edit-art-notas')[a6(0x203)]=i['notasPredefinidas']||'';const j=i['esCombo']===!![];document['getElementById'](a6(0x211))[a6(0x254)]=j,tempComboGroups=getComboGroupsMovil(h);const k=document[a6(0x251)](a6(0x1ee));k[a6(0x2a3)][a6(0x2aa)]=j?'flex':'none',updateEditComboGroupsListMovil(h),renderVariantesArt(i['variantes']||[]),document[a6(0x251)](a6(0x1f3))[a6(0x1fd)][a6(0x235)]('open'),document[a6(0x251)](a6(0x1f5))[a6(0x1fd)]['add'](a6(0x23a));}function cerrarDrawerEditArt(){const a7=w;document['getElementById']('overlay-edit-art')[a7(0x1fd)]['remove'](a7(0x23a)),document['getElementById'](a7(0x1f5))[a7(0x1fd)]['remove']('open');}function toggleComboPanelMovil(){const a8=w,g=document['getElementById'](a8(0x211))[a8(0x254)];document[a8(0x251)](a8(0x1ee))['style'][a8(0x2aa)]=g?a8(0x294):a8(0x25e);}function getComboGroupsMovil(g){const a9=w,h=cartaData[g],i=h?.['comboGroups'];if(!i)return[];const j=Array[a9(0x24b)](i)?i:Object[a9(0x219)](i);return j[a9(0x1ed)](k=>{const aa=a9;if(!k)return null;const l=k[aa(0x205)],m=l?Array[aa(0x24b)](l)?l:Object[aa(0x219)](l):[];return{'nombre':k[aa(0x230)]||'','items':m[aa(0x29f)](Boolean)[aa(0x1ed)](n=>({'artId':n[aa(0x1f1)]||'','suplemento':parseFloat(n[aa(0x26d)])||0x0}))};})[a9(0x29f)](Boolean);}function updateEditComboGroupsListMovil(g){const ab=w,h=document[ab(0x251)](ab(0x286));if(!h)return;if(tempComboGroups['length']===0x0){h[ab(0x212)]=ab(0x20f);return;}const i=Object[ab(0x1f7)](categoriasData)[ab(0x250)](([,j],[,k])=>(j[ab(0x270)]??0x3e7)-(k['orden']??0x3e7)||j['nombre']['localeCompare'](k['nombre'],'es'))[ab(0x1ed)](([j,k])=>{const ac=ab,l=Object[ac(0x1f7)](cartaData)[ac(0x29f)](([m,n])=>n[ac(0x22a)]===j&&m!==g)[ac(0x250)](([,m],[,n])=>(m[ac(0x270)]||0x0)-(n[ac(0x270)]||0x0)||m['nombre']['localeCompare'](n['nombre'],'es'));if(!l[ac(0x289)])return'';return'<optgroup\x20label=\x22'+k[ac(0x230)]+ac(0x239)+l[ac(0x1ed)](([m,n])=>'<option\x20value=\x22'+m+'\x22>'+n[ac(0x230)]+'\x20('+Number(n[ac(0x246)])[ac(0x279)](0x2)+ac(0x287))[ac(0x26a)]('')+'\x0a\x20\x20\x20\x20\x20\x20</optgroup>';})[ab(0x26a)]('');h[ab(0x212)]=tempComboGroups[ab(0x1ed)]((j,k)=>ab(0x1e3)+j[ab(0x230)]+ab(0x22b)+k+ab(0x253)+(j['items']||[])['map']((l,m)=>{const ad=ab,n=cartaData[l[ad(0x1f1)]],o=n?n['nombre']:'[Artículo\x20Eliminado]';return ad(0x2a9)+o+'\x20'+(l[ad(0x26d)]>0x0?ad(0x1fb)+Number(l[ad(0x26d)])['toFixed'](0x2)+'\x20€</b>':ad(0x2a7))+ad(0x299)+k+',\x20'+m+ad(0x258);})['join']('')+ab(0x215)+k+ab(0x1e7)+i+ab(0x2b2)+k+'\x22\x20placeholder=\x22Supl.\x20€\x22\x20step=\x220.05\x22\x20min=\x220\x22\x20class=\x22form-input\x22\x20style=\x22width:70px;font-size:11px;height:30px;padding:2px\x206px;\x22\x20/>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-edit-art\x22\x20onclick=\x22window.agregarOpcionComboMovil('+k+ab(0x291))[ab(0x26a)]('');}window['agregarGrupoComboMovil']=async()=>{const ae=w,g=document['getElementById']('edit-art-id')[ae(0x203)],h=await showCustomPrompt(ae(0x201),ae(0x240));if(!h||!h[ae(0x261)]())return;const i=getComboGroupsMovil(g);i[ae(0x21f)]({'nombre':h[ae(0x261)](),'items':[]});const j=cartaData[g];j[ae(0x2b0)]=i,updateEditComboGroupsListMovil(g);},window[w(0x225)]=async g=>{const af=w,h=document[af(0x251)](af(0x21e))['value'],i=await showCustomConfirm('Eliminar\x20Grupo',af(0x24d));if(!i)return;const j=getComboGroupsMovil(h)[af(0x29f)]((l,m)=>m!==g),k=cartaData[h];k['comboGroups']=j['length']?j:null,updateEditComboGroupsListMovil(h);},window['agregarOpcionComboMovil']=g=>{const ag=w,h=document['getElementById'](ag(0x21e))['value'],i=document[ag(0x251)](ag(0x2b5)+g),j=document[ag(0x251)](ag(0x277)+g);if(!i||!j)return;const k=i[ag(0x203)],l=parseFloat(j[ag(0x203)])||0x0;if(!k){toast(ag(0x231));return;}const m=getComboGroupsMovil(h);if(!m[g])return;m[g]['items'][ag(0x21f)]({'artId':k,'suplemento':l});const n=cartaData[h];n[ag(0x2b0)]=m,updateEditComboGroupsListMovil(h);},window[w(0x25f)]=(g,h)=>{const ah=w,i=document['getElementById'](ah(0x21e))['value'],j=getComboGroupsMovil(i);if(!j[g])return;j[g][ah(0x205)]=j[g][ah(0x205)][ah(0x29f)]((l,m)=>m!==h);const k=cartaData[i];k['comboGroups']=j['length']?j:null,updateEditComboGroupsListMovil(i);};function renderVariantesArt(g){const ai=w;tempVariantesArt=[...g];const h=document[ai(0x251)]('art-variantes-list');if(!h)return;if(tempVariantesArt[ai(0x289)]===0x0){h[ai(0x212)]=ai(0x1e0);return;}h[ai(0x212)]=tempVariantesArt[ai(0x1ed)]((i,j)=>'\x0a\x20\x20\x20\x20<div\x20style=\x22display:\x20flex;\x20align-items:\x20center;\x20justify-content:\x20space-between;\x20padding:\x206px\x2010px;\x20background:\x20rgba(255,255,255,0.03);\x20border:\x201px\x20solid\x20var(--border);\x20border-radius:\x206px;\x22>\x0a\x20\x20\x20\x20\x20\x20<span\x20style=\x22font-size:13px;\x22>'+i['nombre']+'\x20('+(Number(i[ai(0x246)]||0x0)>=0x0?'+':'')+Number(i[ai(0x246)]||0x0)[ai(0x279)](0x2)+'€)</span>\x0a\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-close-drawer\x22\x20style=\x22font-size:16px;color:var(--danger);background:none;border:none;cursor:pointer;\x22\x20onclick=\x22window.eliminarVarianteArticulo('+j+ai(0x1f6))[ai(0x26a)]('');}function agregarVarianteArticulo(){const aj=w,g=document[aj(0x251)](aj(0x25c))['value']['trim'](),h=parseFloat(document['getElementById'](aj(0x285))[aj(0x203)])||0x0;if(!g){toast(aj(0x1e9));return;}tempVariantesArt[aj(0x21f)]({'nombre':g,'precio':h}),document[aj(0x251)](aj(0x25c))['value']='',document[aj(0x251)](aj(0x285))[aj(0x203)]='',renderVariantesArt(tempVariantesArt);}function eliminarVarianteArticulo(g){const ak=w;tempVariantesArt[ak(0x274)](g,0x1),renderVariantesArt(tempVariantesArt);}async function abrirModalNuevoArticulo(g){const al=w;showCustomPrompt(al(0x1e1),al(0x26f),async h=>{const am=al;if(!h||!h[am(0x261)]())return;try{const i=push(ref(db,am(0x247)),{'nombre':h[am(0x261)](),'catId':g,'precio':0x0,'destino':am(0x1e2),'disponible':!![]});toast(am(0x262)),setTimeout(()=>abrirDrawerEditArt(g,i['key']),0x12c);}catch(j){toast(am(0x24f));}});}async function guardarArticuloCarta(){const an=w,g=document[an(0x251)](an(0x21e))[an(0x203)],h=document[an(0x251)]('edit-art-cat-id')['value'],i=document[an(0x251)](an(0x21c))[an(0x203)][an(0x261)](),j=parseFloat(document['getElementById'](an(0x26b))['value'])||0x0,k=document['getElementById'](an(0x1eb))[an(0x203)],l=document[an(0x251)](an(0x272))[an(0x254)],m=document[an(0x251)](an(0x26e))[an(0x203)]['trim']()||null,n=document[an(0x251)]('edit-art-escombo')[an(0x254)];if(!i){toast(an(0x223));return;}const o=cartaData[g]||{},p={...o,'nombre':i,'precio':j,'destino':k,'disponible':l,'catId':h,'variantes':tempVariantesArt,'esCombo':n,'notasPredefinidas':m};if(n){const q=tempComboGroups['map'](r=>({'nombre':(r[an(0x230)]||an(0x2ac))['trim'](),'items':(r[an(0x205)]||[])[an(0x29f)](s=>s['artId']!=='')}))[an(0x29f)](r=>r[an(0x205)]['length']>0x0);p['comboGroups']=q;}else p[an(0x1ec)](an(0x2b0))&&delete p['comboGroups'];!m&&(p['hasOwnProperty'](an(0x25a))&&delete p[an(0x25a)]);try{await set(ref(db,'carta/'+g),p),!n&&await remove(ref(db,an(0x221)+g+'/comboGroups')),!m&&await remove(ref(db,an(0x221)+g+an(0x276))),toast('Artículo\x20guardado'),cerrarDrawerEditArt();}catch(r){toast('Error\x20al\x20guardar\x20artículo');}}async function eliminarArticuloCarta(){const ao=w,g=document[ao(0x251)](ao(0x21e))[ao(0x203)],h=cartaData[g];if(!h)return;showCustomConfirm(ao(0x20c),ao(0x1ce)+h['nombre']+'\x22?',async i=>{const ap=ao;if(!i)return;try{await remove(ref(db,ap(0x221)+g)),toast(ap(0x27a)),cerrarDrawerEditArt();}catch(j){toast(ap(0x209));}});}function toast(g){const aq=w,h=document['getElementById'](aq(0x257));if(!h)return;h[aq(0x227)]=g,h['classList']['add'](aq(0x23f)),setTimeout(()=>{const ar=aq;h[ar(0x1fd)][ar(0x1fe)](ar(0x23f));},0x898);}let customModalCallback=null;function showCustomAlert(g,h){const as=w;document['getElementById']('custom-modal-title')[as(0x227)]=g,document[as(0x251)]('custom-modal-message')[as(0x227)]=h,document[as(0x251)](as(0x234))['style']['display']='none',document['getElementById'](as(0x228))['style']['display']=as(0x25e);const i=document[as(0x251)]('custom-modal-btn-ok');i[as(0x227)]=as(0x21d),i[as(0x2af)]=()=>cerrarCustomModal(),document[as(0x251)]('overlay-custom-modal')['style'][as(0x2aa)]='block';const j=document[as(0x251)](as(0x256));j['style'][as(0x2aa)]=as(0x294),setTimeout(()=>{const at=as;document[at(0x251)](at(0x29b))[at(0x1fd)]['add'](at(0x23a)),j[at(0x1fd)][at(0x235)](at(0x23a));},0x14);}function showCustomConfirm(g,h,i){const au=w;customModalCallback=i,document[au(0x251)](au(0x255))[au(0x227)]=g,document['getElementById']('custom-modal-message')['textContent']=h,document[au(0x251)](au(0x234))[au(0x2a3)]['display']=au(0x25e);const j=document[au(0x251)]('custom-modal-btn-cancel');j[au(0x2a3)][au(0x2aa)]=au(0x1d1),j[au(0x2af)]=()=>{cerrarCustomModal();if(customModalCallback)customModalCallback(![]);};const k=document['getElementById'](au(0x217));k[au(0x227)]=au(0x21d),k[au(0x2af)]=()=>{cerrarCustomModal();if(customModalCallback)customModalCallback(!![]);},document[au(0x251)](au(0x29b))['style']['display']='block';const l=document[au(0x251)](au(0x256));l[au(0x2a3)]['display']=au(0x294),setTimeout(()=>{const av=au;document[av(0x251)](av(0x29b))[av(0x1fd)][av(0x235)](av(0x23a)),l[av(0x1fd)][av(0x235)]('open');},0x14);}function showCustomPrompt(g,h,i){const aw=w;customModalCallback=i,document['getElementById'](aw(0x255))[aw(0x227)]=g,document[aw(0x251)](aw(0x1d0))[aw(0x227)]=h;const j=document['getElementById']('custom-modal-input');j[aw(0x203)]='',j[aw(0x2a3)][aw(0x2aa)]='block';const k=document[aw(0x251)](aw(0x228));k[aw(0x2a3)][aw(0x2aa)]=aw(0x1d1),k[aw(0x2af)]=()=>{cerrarCustomModal();if(customModalCallback)customModalCallback(null);};const l=document[aw(0x251)](aw(0x217));l[aw(0x227)]=aw(0x21d),l[aw(0x2af)]=()=>{const ax=aw,n=j[ax(0x203)];cerrarCustomModal();if(customModalCallback)customModalCallback(n);},document[aw(0x251)](aw(0x29b))[aw(0x2a3)][aw(0x2aa)]='block';const m=document[aw(0x251)](aw(0x256));m[aw(0x2a3)]['display']=aw(0x294),setTimeout(()=>{const ay=aw;document[ay(0x251)](ay(0x29b))[ay(0x1fd)][ay(0x235)](ay(0x23a)),m[ay(0x1fd)]['add'](ay(0x23a)),j[ay(0x260)]();},0x14);}function cerrarCustomModal(){const az=w;document[az(0x251)]('overlay-custom-modal')[az(0x1fd)][az(0x1fe)]('open');const g=document[az(0x251)]('custom-modal');g[az(0x1fd)][az(0x1fe)](az(0x23a)),setTimeout(()=>{const aA=az;document[aA(0x251)](aA(0x29b))[aA(0x2a3)]['display']='none',g['style'][aA(0x2aa)]=aA(0x25e);},0xc8);}async function moverArt(g,h,i,j){const aB=w,k=Object['entries'](cartaData)[aB(0x29f)](([n,o])=>o[aB(0x22a)]===h)[aB(0x250)]((n,o)=>(n[0x1][aB(0x270)]||0x0)-(o[0x1]['orden']||0x0)||(n[0x1][aB(0x230)]||'')[aB(0x1f2)](o[0x1][aB(0x230)]||'')),l=i+j;if(l<0x0||l>=k[aB(0x289)])return;const m={};k[aB(0x216)](([n],o)=>{const aC=aB;m[aC(0x221)+n+'/orden']=o;}),m[aB(0x221)+k[i][0x0]+aB(0x28e)]=l,m[aB(0x221)+k[l][0x0]+aB(0x28e)]=i,await update(ref(db),m);}async function moverCat(g,h,i){const aD=w,j=Object[aD(0x1f7)](categoriasData)[aD(0x250)]((m,n)=>{const aE=aD;return(m[0x1][aE(0x270)]??0x3e7)-(n[0x1][aE(0x270)]??0x3e7)||(m[0x1][aE(0x230)]||'')[aE(0x1f2)](n[0x1][aE(0x230)]||'');}),k=h+i;if(k<0x0||k>=j[aD(0x289)])return;const l={};j[aD(0x216)](([m],n)=>{const aF=aD;l[aF(0x290)+m+'/orden']=n;}),l[aD(0x290)+j[h][0x0]+aD(0x28e)]=k,l['categorias/'+j[k][0x0]+aD(0x28e)]=h,await update(ref(db),l);}window[w(0x288)]=function(g){const aG=w;showCustomAlert(aG(0x243),g);},window[w(0x266)]=moverArt,window[w(0x292)]=moverCat,window[w(0x2a0)]=toggleAccordion,window['abrirDrawerEditCat']=abrirDrawerEditCat,window[w(0x204)]=cerrarDrawerEditCat,window[w(0x25b)]=eliminarVarianteCategoria,window[w(0x1f9)]=agregarVarianteCategoria,window['abrirModalNuevaCategoria']=abrirModalNuevaCategoria,window['guardarCategoriaCarta']=guardarCategoriaCarta,window[w(0x218)]=eliminarCategoriaCarta,window[w(0x220)]=abrirDrawerEditArt,window['cerrarDrawerEditArt']=cerrarDrawerEditArt,window['toggleComboPanelMovil']=toggleComboPanelMovil,window[w(0x242)]=eliminarVarianteArticulo,window[w(0x20b)]=agregarVarianteArticulo,window[w(0x23e)]=abrirModalNuevoArticulo,window[w(0x1d2)]=guardarArticuloCarta,window[w(0x1fa)]=eliminarArticuloCarta,window[w(0x237)]=cerrarCustomModal,window[w(0x280)]=cerrarSesion,init();
+import { db } from './firebase.js';
+import {
+  ref, get, onValue, query, orderByChild, startAt, endAt,
+  set as fbSet, push as fbPush, remove as fbRemove, update as fbUpdate
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+// --- TOUCH MENU VERSION FOR OFFLINE CACHE SYNC ---
+const checkAndTouchMenu = (refVal) => {
+  if (!refVal) return;
+  const url = refVal.toString();
+  if (url.includes('/carta') || url.includes('/categorias') || url.includes('carta') || url.includes('categorias')) {
+    fbSet(ref(db, 'config/menu_version'), Date.now()).catch(err => console.error(err));
+  }
+};
+
+const set = (refVal, data) => {
+  const res = fbSet(refVal, data);
+  checkAndTouchMenu(refVal);
+  return res;
+};
+
+const push = (refVal, data) => {
+  const res = fbPush(refVal, data);
+  checkAndTouchMenu(refVal);
+  return res;
+};
+
+const remove = (refVal) => {
+  const res = fbRemove(refVal);
+  checkAndTouchMenu(refVal);
+  return res;
+};
+
+const update = (refVal, data) => {
+  const res = fbUpdate(refVal, data);
+  if (data && typeof data === 'object') {
+    const keys = Object.keys(data);
+    if (keys.some(k => k.startsWith('carta') || k.startsWith('categorias'))) {
+      fbSet(ref(db, 'config/menu_version'), Date.now()).catch(err => console.error(err));
+    }
+  }
+  checkAndTouchMenu(refVal);
+  return res;
+};
+
+// --- VARIABLES DE ESTADO ---
+// Nunca se usa una contraseña por defecto tras un error de lectura. Si Firebase
+// no entrega una contraseña configurada, el acceso queda bloqueado.
+let passwordCorrecta = null;
+let pinBuffer = "";
+let categoriasData = {};
+let cartaData = {};
+let seguridadData = {};
+let accesoInicializado = false;
+
+const PIN_SESSION_KEY = "encargado_auth_session";
+
+// --- ELEMENTOS DEL DOM ---
+const pinScreen = document.getElementById("pin-screen");
+const appShell = document.getElementById("app-shell");
+const pinDots = [
+  document.getElementById("pd0"),
+  document.getElementById("pd1"),
+  document.getElementById("pd2"),
+  document.getElementById("pd3")
+];
+const pinErrorMsg = document.getElementById("pin-error");
+
+// --- INICIALIZACIÓN Y SEGURIDAD PIN ---
+async function init() {
+  // 1. Obtener la configuración de seguridad y contraseña en tiempo real.
+  // Antes se recuperaba "encargado1234" si faltaba el dato o fallaba Firebase,
+  // lo que podía reabrir el acceso con 1234 aunque existiese una clave propia.
+  onValue(ref(db, "config/seguridad"), (snap) => {
+    seguridadData = snap.val() || {};
+    const pass = typeof seguridadData.encargadoPassword === "string"
+      ? seguridadData.encargadoPassword.trim()
+      : "";
+    passwordCorrecta = pass || null;
+
+    // Si la configuración desaparece o se desactiva el acceso, cerrar también
+    // las sesiones ya abiertas.
+    if (sessionStorage.getItem(PIN_SESSION_KEY) === "1" &&
+        (seguridadData.encargadoAccesible === false || !passwordCorrecta)) {
+      cerrarSesion();
+      return;
+    }
+
+    if (!accesoInicializado) {
+      accesoInicializado = true;
+      if (sessionStorage.getItem(PIN_SESSION_KEY) === "1" && passwordCorrecta) {
+        desbloquearPanel();
+      } else {
+        configurarAcceso();
+      }
+    } else if (!sessionStorage.getItem(PIN_SESSION_KEY)) {
+      configurarAcceso();
+    }
+  }, () => {
+    passwordCorrecta = null;
+    sessionStorage.removeItem(PIN_SESSION_KEY);
+    configurarAcceso("No se pudo verificar la contraseña. Comprueba la conexión e inténtalo de nuevo.");
+  });
+}
+
+function configurarAcceso(mensajeBloqueo = "") {
+  const dots = document.querySelector(".pin-dots");
+  const pinPad = document.getElementById("pin-pad");
+  const textLogin = document.getElementById("text-login-container");
+
+  if (!passwordCorrecta) {
+    dots.style.display = "none";
+    pinPad.style.display = "none";
+    textLogin.style.display = "none";
+    pinErrorMsg.textContent = mensajeBloqueo || "No hay una contraseña de encargado configurada.";
+    return;
+  }
+
+  pinErrorMsg.textContent = "";
+  // Determinar si mostramos teclado numérico o teclado de texto alfanumérico.
+  const esNumerico4 = /^\d{4}$/.test(passwordCorrecta) || passwordCorrecta === "encargado1234";
+
+  if (esNumerico4) {
+    dots.style.display = "flex";
+    pinPad.style.display = "grid";
+    textLogin.style.display = "none";
+    configurarTecladoPin();
+  } else {
+    dots.style.display = "none";
+    pinPad.style.display = "none";
+    textLogin.style.display = "flex";
+    configurarTecladoTexto();
+  }
+}
+
+function configurarTecladoPin() {
+  // Evitar duplicar listeners limpiando antes de asignar
+  const pinPad = document.getElementById("pin-pad");
+  pinPad.replaceWith(pinPad.cloneNode(true));
+  
+  document.getElementById("pin-pad").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-k]");
+    if (!btn) return;
+    const k = btn.dataset.k;
+    
+    if (k === "del") {
+      pinBuffer = pinBuffer.slice(0, -1);
+      actualizarDots();
+    } else if (k !== "") {
+      if (pinBuffer.length >= 4) return;
+      pinBuffer += k;
+      actualizarDots();
+      
+      if (pinBuffer.length === 4) {
+        verificarPin();
+      }
+    }
+  });
+}
+
+function configurarTecladoTexto() {
+  const btnEntrar = document.getElementById("btn-entrar-texto");
+  const inputTexto = document.getElementById("text-pin-input");
+
+  btnEntrar.onclick = () => {
+    const val = inputTexto.value.trim();
+    if (val === passwordCorrecta) {
+      verificarYEntrar();
+    } else {
+      pinErrorMsg.textContent = "Contraseña Incorrecta";
+      inputTexto.value = "";
+      setTimeout(() => {
+        pinErrorMsg.textContent = "";
+      }, 1500);
+    }
+  };
+
+  inputTexto.onkeydown = (e) => {
+    if (e.key === "Enter") {
+      btnEntrar.click();
+    }
+  };
+}
+
+function actualizarDots(error = false) {
+  pinDots.forEach((dot, idx) => {
+    dot.className = "pin-dot" + (idx < pinBuffer.length ? (error ? " error" : " filled") : "");
+  });
+}
+
+async function verificarPin() {
+  if (!passwordCorrecta) return;
+  const esCorrecto = (pinBuffer === passwordCorrecta) || (passwordCorrecta === "encargado1234" && pinBuffer === "1234");
+  
+  if (esCorrecto) {
+    verificarYEntrar();
+  } else {
+    actualizarDots(true);
+    pinErrorMsg.textContent = "PIN Incorrecto";
+    setTimeout(() => {
+      pinBuffer = "";
+      actualizarDots();
+      pinErrorMsg.textContent = "";
+    }, 1000);
+  }
+}
+
+async function verificarYEntrar() {
+  if (!passwordCorrecta) {
+    pinErrorMsg.textContent = "No se pudo verificar la contraseña.";
+    return;
+  }
+  // Comprobar si la página está accesible en Firebase
+  try {
+    const snap = await get(ref(db, "config/seguridad"));
+    const data = snap.val() || {};
+    const passActual = typeof data.encargadoPassword === "string" ? data.encargadoPassword.trim() : "";
+    if (data.encargadoAccesible === false || !passActual) {
+      pinErrorMsg.textContent = data.encargadoAccesible === false
+        ? "Acceso desactivado por gerencia"
+        : "No hay una contraseña de encargado configurada.";
+      pinBuffer = "";
+      actualizarDots();
+      return;
+    }
+    if (passActual !== passwordCorrecta) {
+      passwordCorrecta = passActual;
+      pinBuffer = "";
+      actualizarDots();
+      configurarAcceso();
+      pinErrorMsg.textContent = "La contraseña ha cambiado. Introdúcela de nuevo.";
+      return;
+    }
+  } catch (e) {
+    console.error(e);
+    pinErrorMsg.textContent = "No se pudo verificar la contraseña. Inténtalo de nuevo.";
+    return;
+  }
+
+  iniciarSesionExitosa();
+}
+
+function iniciarSesionExitosa() {
+  sessionStorage.setItem(PIN_SESSION_KEY, "1");
+  desbloquearPanel();
+}
+
+function desbloquearPanel() {
+  pinScreen.style.display = "none";
+  appShell.style.display = "flex";
+  conectarListeners();
+}
+
+function cerrarSesion() {
+  sessionStorage.removeItem(PIN_SESSION_KEY);
+  window.location.reload();
+}
+
+// --- CONECTAR BASE DE DATOS Y LISTENERS ---
+function conectarListeners() {
+  // 1. Estado de red
+  const netDot = document.getElementById("network-status");
+  onValue(ref(db, ".info/connected"), (snap) => {
+    if (snap.val() === true) {
+      netDot.className = "status-dot connected";
+    } else {
+      netDot.className = "status-dot";
+    }
+  });
+
+  // 2. Nombre del local
+  onValue(ref(db, "config/local"), (snap) => {
+    const data = snap.val() || {};
+    document.getElementById("local-title").textContent = (data.nombre || "Encargado") + " - Carta";
+  });
+
+  // 3. Categorías y Carta
+  onValue(ref(db, "categorias"), (snap) => {
+    categoriasData = snap.val() || {};
+    renderCarta();
+  });
+
+  onValue(ref(db, "carta"), (snap) => {
+    cartaData = snap.val() || {};
+    renderCarta();
+  });
+}
+
+// --- RENDERIZAR CARTA ACCORDEON ---
+let accordionState = {}; // Guarda qué categorías están abiertas por ID
+
+function renderCarta() {
+  const container = document.getElementById("carta-accordion");
+  if (!container) return;
+  
+  if (Object.keys(categoriasData).length === 0) {
+    container.innerHTML = `<div style="text-align:center;color:var(--text-dim);padding:24px;">No hay categorías creadas. Pulsa "+" para añadir una.</div>`;
+    return;
+  }
+
+  // Ordenar categorías por el campo "orden"
+  const catsOrdenadas = Object.entries(categoriasData).sort((a, b) => {
+    return (a[1].orden ?? 999) - (b[1].orden ?? 999) || (a[1].nombre || "").localeCompare(b[1].nombre || "");
+  });
+
+  container.innerHTML = catsOrdenadas.map(([cid, cat], idx) => {
+    const esAbierta = accordionState[cid] === true;
+    
+    // Obtener artículos de la categoría ordenados
+    const artsCat = Object.entries(cartaData)
+      .filter(([_, art]) => art.catId === cid)
+      .sort((a, b) => (a[1].orden || 0) - (b[1].orden || 0) || (a[1].nombre || "").localeCompare(b[1].nombre || ""));
+    
+    const artsHtml = artsCat.length > 0 
+      ? artsCat.map(([aid, art], idxArt) => `
+          <div class="art-item ${art.disponible === false ? 'inactive' : ''}">
+            <div class="art-info">
+              <div class="art-name">${art.nombre}</div>
+              <div class="art-price">${Number(art.precio || 0).toFixed(2)} €</div>
+            </div>
+            <div class="art-actions">
+              <button class="btn-edit-art" title="Subir artículo" onclick="moverArt('${aid}', '${cid}', ${idxArt}, -1)" ${idxArt === 0 ? 'disabled' : ''}>↑</button>
+              <button class="btn-edit-art" title="Bajar artículo" onclick="moverArt('${aid}', '${cid}', ${idxArt}, 1)" ${idxArt === artsCat.length - 1 ? 'disabled' : ''}>↓</button>
+              <button class="btn-edit-art" onclick="window.abrirDrawerEditArt('${cid}', '${aid}')">Editar</button>
+            </div>
+          </div>
+        `).join('')
+      : `<div style="text-align:center;font-size:12px;color:var(--text-dim);padding:10px 0;">Categoría vacía.</div>`;
+
+    return `
+      <div class="cat-accordion ${esAbierta ? 'open' : ''}" id="cat-acc-${cid}">
+        <div class="cat-header" onclick="window.toggleAccordion('${cid}')">
+          <div class="cat-title-wrap">
+            <span class="cat-chevron">▶</span>
+            <span class="cat-title">${cat.nombre}</span>
+            <span class="cat-badge">${artsCat.length}</span>
+          </div>
+          <div class="cat-actions" onclick="event.stopPropagation()">
+            <button class="btn-cat-edit" title="Subir categoría" onclick="moverCat('${cid}', ${idx}, -1)" ${idx === 0 ? 'disabled' : ''}>↑</button>
+            <button class="btn-cat-edit" title="Bajar categoría" onclick="moverCat('${cid}', ${idx}, 1)" ${idx === catsOrdenadas.length - 1 ? 'disabled' : ''}>↓</button>
+            <button class="btn-cat-edit" onclick="window.abrirDrawerEditCat('${cid}')">⚙</button>
+          </div>
+        </div>
+        <div class="cat-content">
+          <div class="art-list">
+            ${artsHtml}
+            <button class="btn-edit-art" style="margin-top:4px;width:100%;height:36px;border-style:dashed;" onclick="window.abrirModalNuevoArticulo('${cid}')">+ Añadir Artículo</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleAccordion(cid) {
+  accordionState[cid] = !accordionState[cid];
+  const el = document.getElementById("cat-acc-" + cid);
+  if (el) {
+    el.classList.toggle("open", accordionState[cid]);
+  }
+}
+
+// --- GESTIÓN EDIT CATEGORÍA ---
+function abrirDrawerEditCat(cid) {
+  const cat = categoriasData[cid];
+  if (!cat) return;
+  
+  document.getElementById("edit-cat-id").value = cid;
+  document.getElementById("edit-cat-nombre").value = cat.nombre || "";
+  document.getElementById("edit-cat-notas").value = cat.notasPredefinidas || "";
+  
+  renderVariantesCat(cat.variantes || []);
+  
+  document.getElementById("overlay-edit-cat").classList.add("open");
+  document.getElementById("drawer-edit-cat").classList.add("open");
+}
+
+function cerrarDrawerEditCat() {
+  document.getElementById("overlay-edit-cat").classList.remove("open");
+  document.getElementById("drawer-edit-cat").classList.remove("open");
+}
+
+let tempVariantesCat = [];
+function renderVariantesCat(variantes) {
+  tempVariantesCat = [...variantes];
+  const container = document.getElementById("cat-variantes-list");
+  if (!container) return;
+  
+  if (tempVariantesCat.length === 0) {
+    container.innerHTML = `<div style="font-size:12px;color:var(--text-dim);text-align:center;">Sin variantes configuradas.</div>`;
+    return;
+  }
+  
+  container.innerHTML = tempVariantesCat.map((v, idx) => `
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px;">
+      <span style="font-size:13px;">${v.nombre} (${Number(v.precio || 0) >= 0 ? '+' : ''}${Number(v.precio || 0).toFixed(2)}€)</span>
+      <button class="btn-close-drawer" style="font-size:16px;color:var(--danger);background:none;border:none;cursor:pointer;" onclick="window.eliminarVarianteCategoria(${idx})">&times;</button>
+    </div>
+  `).join('');
+}
+
+function agregarVarianteCategoria() {
+  const name = document.getElementById("new-cat-var-nombre").value.trim();
+  const price = parseFloat(document.getElementById("new-cat-var-precio").value) || 0;
+  
+  if (!name) {
+    toast("Introduce un nombre de variante");
+    return;
+  }
+  
+  tempVariantesCat.push({ nombre: name, precio: price });
+  document.getElementById("new-cat-var-nombre").value = "";
+  document.getElementById("new-cat-var-precio").value = "";
+  renderVariantesCat(tempVariantesCat);
+}
+
+function eliminarVarianteCategoria(idx) {
+  tempVariantesCat.splice(idx, 1);
+  renderVariantesCat(tempVariantesCat);
+}
+
+async function abrirModalNuevaCategoria() {
+  showCustomPrompt("Nueva Categoría", "Introduce el nombre de la categoría:", async (nombre) => {
+    if (!nombre || !nombre.trim()) return;
+    try {
+      const maxOrden = Object.values(categoriasData).reduce((max, c) => Math.max(max, c.orden || 0), 0);
+      const newRef = push(ref(db, "categorias"), {
+        nombre: nombre.trim(),
+        orden: maxOrden + 1
+      });
+      toast("Categoría creada");
+      // Abrir edición inmediatamente para poder configurar notas o variantes
+      setTimeout(() => abrirDrawerEditCat(newRef.key), 300);
+    } catch (err) {
+      toast("Error al crear categoría");
+    }
+  });
+}
+
+async function guardarCategoriaCarta() {
+  const cid = document.getElementById("edit-cat-id").value;
+  const nombre = document.getElementById("edit-cat-nombre").value.trim();
+  const notas = document.getElementById("edit-cat-notas").value.trim() || null;
+  
+  if (!nombre) {
+    toast("El nombre no puede estar vacío");
+    return;
+  }
+  
+  const catActual = categoriasData[cid] || {};
+  
+  const updatedData = {
+    ...catActual,
+    nombre,
+    variantes: tempVariantesCat,
+    notasPredefinidas: notas
+  };
+
+  try {
+    await set(ref(db, `categorias/${cid}`), updatedData);
+    if (!notas) {
+      await remove(ref(db, `categorias/${cid}/notasPredefinidas`));
+    }
+    toast("Categoría guardada");
+    cerrarDrawerEditCat();
+  } catch (err) {
+    toast("Error al guardar categoría");
+  }
+}
+
+async function eliminarCategoriaCarta() {
+  const cid = document.getElementById("edit-cat-id").value;
+  const cat = categoriasData[cid];
+  if (!cat) return;
+  
+  showCustomConfirm("Eliminar Categoría", `¿Seguro que deseas eliminar la categoría "${cat.nombre}"? Se borrarán todos los artículos asociados.`, async (conf) => {
+    if (!conf) return;
+    try {
+      // 1. Borrar artículos vinculados
+      const artsCat = Object.keys(cartaData).filter(aid => cartaData[aid].catId === cid);
+      for (const aid of artsCat) {
+        await remove(ref(db, `carta/${aid}`));
+      }
+      // 2. Borrar categoría
+      await remove(ref(db, `categorias/${cid}`));
+      toast("Categoría eliminada");
+      cerrarDrawerEditCat();
+    } catch (e) {
+      toast("Error al eliminar categoría");
+    }
+  });
+}
+
+
+// --- GESTIÓN EDIT ARTÍCULO ---
+let tempVariantesArt = [];
+let tempComboGroups = [];
+
+function abrirDrawerEditArt(cid, aid) {
+  const art = cartaData[aid];
+  if (!art) return;
+  
+  document.getElementById("edit-art-id").value = aid;
+  document.getElementById("edit-art-cat-id").value = cid;
+  document.getElementById("edit-art-nombre").value = art.nombre || "";
+  document.getElementById("edit-art-precio").value = art.precio != null ? art.precio : "";
+  document.getElementById("edit-art-destino").value = art.destino || "cocina";
+  document.getElementById("edit-art-activo").checked = art.disponible !== false;
+  document.getElementById("edit-art-notas").value = art.notasPredefinidas || "";
+  
+  // Combo flag y panel
+  const esCombo = art.esCombo === true;
+  document.getElementById("edit-art-escombo").checked = esCombo;
+  tempComboGroups = getComboGroupsMovil(aid);
+  
+  const comboPanel = document.getElementById("combo-panel-movil");
+  comboPanel.style.display = esCombo ? "flex" : "none";
+  updateEditComboGroupsListMovil(aid);
+
+  // Variantes
+  renderVariantesArt(art.variantes || []);
+  
+  document.getElementById("overlay-edit-art").classList.add("open");
+  document.getElementById("drawer-edit-art").classList.add("open");
+}
+
+function cerrarDrawerEditArt() {
+  document.getElementById("overlay-edit-art").classList.remove("open");
+  document.getElementById("drawer-edit-art").classList.remove("open");
+}
+
+function toggleComboPanelMovil() {
+  const isChecked = document.getElementById("edit-art-escombo").checked;
+  document.getElementById("combo-panel-movil").style.display = isChecked ? "flex" : "none";
+}
+
+function getComboGroupsMovil(aid) {
+  const art = cartaData[aid];
+  const raw = art?.comboGroups;
+  if (!raw) return [];
+  const arr = Array.isArray(raw) ? raw : Object.values(raw);
+  return arr.map(g => {
+    if (!g) return null;
+    const itemsRaw = g.items;
+    const itemsArr = itemsRaw ? (Array.isArray(itemsRaw) ? itemsRaw : Object.values(itemsRaw)) : [];
+    return {
+      nombre: g.nombre || '',
+      items: itemsArr.filter(Boolean).map(item => ({
+        artId: item.artId || '',
+        suplemento: parseFloat(item.suplemento) || 0
+      }))
+    };
+  }).filter(Boolean);
+}
+
+// --- LOGICA DE COMBOS MOVIL ---
+function updateEditComboGroupsListMovil(aid) {
+  const container = document.getElementById("combo-groups-lista-movil");
+  if (!container) return;
+
+  if (tempComboGroups.length === 0) {
+    container.innerHTML = `<div style="font-size:12px;color:var(--text-dim);text-align:center;">Sin grupos de selección agregados.</div>`;
+    return;
+  }
+
+  // Cargar lista de otros artículos ordenada
+  const otherArticlesHTML = Object.entries(categoriasData)
+    .sort(([, ca], [, cb]) => (ca.orden ?? 999) - (cb.orden ?? 999) || ca.nombre.localeCompare(cb.nombre, 'es'))
+    .map(([catId, cat]) => {
+      const catArts = Object.entries(cartaData)
+        .filter(([itemId, item]) => item.catId === catId && itemId !== aid)
+        .sort(([, artA], [, artB]) => (artA.orden || 0) - (artB.orden || 0) || artA.nombre.localeCompare(artB.nombre, 'es'));
+      if (!catArts.length) return '';
+      return `<optgroup label="${cat.nombre}">
+        ${catArts.map(([itemId, item]) => `<option value="${itemId}">${item.nombre} (${Number(item.precio).toFixed(2)} €)</option>`).join('')}
+      </optgroup>`;
+    }).join('');
+
+  container.innerHTML = tempComboGroups.map((g, gIdx) => `
+    <div style="background:var(--panel-light);border:1px solid var(--border);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:6px;margin-bottom:6px">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:4px">
+        <span style="font-weight:bold;font-size:12px;color:var(--text)">Grupo: ${g.nombre}</span>
+        <button class="btn-close-drawer" onclick="window.eliminarGrupoComboMovil(${gIdx})" style="font-size:16px;color:var(--danger);background:none;border:none;cursor:pointer;">&times;</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        ${(g.items || []).map((item, itemIdx) => {
+          const subArt = cartaData[item.artId];
+          const subArtNombre = subArt ? subArt.nombre : '[Artículo Eliminado]';
+          return `
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:2px 0">
+              <span>${subArtNombre} ${item.suplemento > 0 ? `<b style="color:var(--accent2)">+${Number(item.suplemento).toFixed(2)} €</b>` : '<span style="color:var(--text-dim)">Sin supl.</span>'}</span>
+              <button class="btn-close-drawer" onclick="window.eliminarOpcionComboMovil(${gIdx}, ${itemIdx})" style="font-size:14px;color:var(--danger);background:none;border:none;cursor:pointer;">&times;</button>
+            </div>
+          `;
+        }).join('')}
+      </div>
+      <div style="display:flex;gap:4px;margin-top:4px;align-items:center">
+        <select id="combo-art-select-movil-${gIdx}" class="form-input" style="flex:1;font-size:11px;height:30px;padding:2px 6px;">
+          <option value="">— Seleccionar artículo —</option>
+          ${otherArticlesHTML}
+        </select>
+        <input type="number" id="combo-supl-input-movil-${gIdx}" placeholder="Supl. €" step="0.05" min="0" class="form-input" style="width:70px;font-size:11px;height:30px;padding:2px 6px;" />
+        <button class="btn-edit-art" onclick="window.agregarOpcionComboMovil(${gIdx})" style="padding:0 8px;font-size:11px;height:30px;background:var(--accent);color:white;border-color:var(--accent);">+ Añadir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+window.agregarGrupoComboMovil = async () => {
+  const aid = document.getElementById("edit-art-id").value;
+  const nombre = await showCustomPrompt("Nuevo Grupo", "Nombre del grupo (ej: Primeros, Segundos, Postres):");
+  if (!nombre || !nombre.trim()) return;
+  const groups = getComboGroupsMovil(aid);
+  groups.push({ nombre: nombre.trim(), items: [] });
+  const art = cartaData[aid];
+  art.comboGroups = groups;
+  updateEditComboGroupsListMovil(aid);
+};
+
+window.eliminarGrupoComboMovil = async (groupIdx) => {
+  const aid = document.getElementById("edit-art-id").value;
+  const seguro = await showCustomConfirm("Eliminar Grupo", "¿Deseas eliminar este grupo del combo?");
+  if (!seguro) return;
+  const groups = getComboGroupsMovil(aid).filter((_, idx) => idx !== groupIdx);
+  const art = cartaData[aid];
+  art.comboGroups = groups.length ? groups : null;
+  updateEditComboGroupsListMovil(aid);
+};
+
+window.agregarOpcionComboMovil = (groupIdx) => {
+  const aid = document.getElementById("edit-art-id").value;
+  const selectEl = document.getElementById(`combo-art-select-movil-${groupIdx}`);
+  const suplEl = document.getElementById(`combo-supl-input-movil-${groupIdx}`);
+  if (!selectEl || !suplEl) return;
+  const artId = selectEl.value;
+  const suplemento = parseFloat(suplEl.value) || 0;
+  if (!artId) { toast("Elige un artículo"); return; }
+  
+  const groups = getComboGroupsMovil(aid);
+  if (!groups[groupIdx]) return;
+  groups[groupIdx].items.push({ artId, suplemento });
+  
+  const art = cartaData[aid];
+  art.comboGroups = groups;
+  updateEditComboGroupsListMovil(aid);
+};
+
+window.eliminarOpcionComboMovil = (groupIdx, itemIdx) => {
+  const aid = document.getElementById("edit-art-id").value;
+  const groups = getComboGroupsMovil(aid);
+  if (!groups[groupIdx]) return;
+  groups[groupIdx].items = groups[groupIdx].items.filter((_, idx) => idx !== itemIdx);
+  
+  const art = cartaData[aid];
+  art.comboGroups = groups.length ? groups : null;
+  updateEditComboGroupsListMovil(aid);
+};
+
+// --- LOGICA VARIANTES DE ARTÍCULO ---
+function renderVariantesArt(variantes) {
+  tempVariantesArt = [...variantes];
+  const container = document.getElementById("art-variantes-list");
+  if (!container) return;
+  
+  if (tempVariantesArt.length === 0) {
+    container.innerHTML = `<div style="font-size:12px;color:var(--text-dim);text-align:center;">Sin variantes específicas.</div>`;
+    return;
+  }
+  
+  container.innerHTML = tempVariantesArt.map((v, idx) => `
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px;">
+      <span style="font-size:13px;">${v.nombre} (${Number(v.precio || 0) >= 0 ? '+' : ''}${Number(v.precio || 0).toFixed(2)}€)</span>
+      <button class="btn-close-drawer" style="font-size:16px;color:var(--danger);background:none;border:none;cursor:pointer;" onclick="window.eliminarVarianteArticulo(${idx})">&times;</button>
+    </div>
+  `).join('');
+}
+
+function agregarVarianteArticulo() {
+  const name = document.getElementById("new-var-nombre").value.trim();
+  const price = parseFloat(document.getElementById("new-var-precio").value) || 0;
+  
+  if (!name) {
+    toast("Introduce un nombre de variante");
+    return;
+  }
+  
+  tempVariantesArt.push({ nombre: name, precio: price });
+  document.getElementById("new-var-nombre").value = "";
+  document.getElementById("new-var-precio").value = "";
+  renderVariantesArt(tempVariantesArt);
+}
+
+function eliminarVarianteArticulo(idx) {
+  tempVariantesArt.splice(idx, 1);
+  renderVariantesArt(tempVariantesArt);
+}
+
+async function abrirModalNuevoArticulo(cid) {
+  showCustomPrompt("Nuevo Artículo", "Introduce el nombre del artículo:", async (nombre) => {
+    if (!nombre || !nombre.trim()) return;
+    try {
+      const newRef = push(ref(db, "carta"), {
+        nombre: nombre.trim(),
+        catId: cid,
+        precio: 0.00,
+        destino: "cocina",
+        disponible: true
+      });
+      toast("Artículo creado");
+      setTimeout(() => abrirDrawerEditArt(cid, newRef.key), 300);
+    } catch (e) {
+      toast("Error al crear artículo");
+    }
+  });
+}
+
+async function guardarArticuloCarta() {
+  const aid = document.getElementById("edit-art-id").value;
+  const cid = document.getElementById("edit-art-cat-id").value;
+  const nombre = document.getElementById("edit-art-nombre").value.trim();
+  const precio = parseFloat(document.getElementById("edit-art-precio").value) || 0;
+  const destino = document.getElementById("edit-art-destino").value;
+  const disponible = document.getElementById("edit-art-activo").checked;
+  const notas = document.getElementById("edit-art-notas").value.trim() || null;
+  const esCombo = document.getElementById("edit-art-escombo").checked;
+
+  if (!nombre) {
+    toast("El nombre no puede estar vacío");
+    return;
+  }
+
+  const artActual = cartaData[aid] || {};
+
+  const updatedData = {
+    ...artActual,
+    nombre,
+    precio,
+    destino,
+    disponible,
+    catId: cid,
+    variantes: tempVariantesArt,
+    esCombo,
+    notasPredefinidas: notas
+  };
+
+  if (esCombo) {
+    // Validar nombres de grupo vacíos o sin opciones
+    const validGroups = tempComboGroups.map(g => ({
+      nombre: (g.nombre || "Selección").trim(),
+      items: (g.items || []).filter(o => o.artId !== "")
+    })).filter(g => g.items.length > 0);
+
+    updatedData.comboGroups = validGroups;
+  } else {
+    if (updatedData.hasOwnProperty("comboGroups")) {
+      delete updatedData.comboGroups;
+    }
+  }
+
+  if (!notas) {
+    if (updatedData.hasOwnProperty("notasPredefinidas")) {
+      delete updatedData.notasPredefinidas;
+    }
+  }
+
+  try {
+    await set(ref(db, `carta/${aid}`), updatedData);
+    // Asegurar limpieza de nodos eliminados en Firebase
+    if (!esCombo) {
+      await remove(ref(db, `carta/${aid}/comboGroups`));
+    }
+    if (!notas) {
+      await remove(ref(db, `carta/${aid}/notasPredefinidas`));
+    }
+    toast("Artículo guardado");
+    cerrarDrawerEditArt();
+  } catch (err) {
+    toast("Error al guardar artículo");
+  }
+}
+
+async function eliminarArticuloCarta() {
+  const aid = document.getElementById("edit-art-id").value;
+  const art = cartaData[aid];
+  if (!art) return;
+  
+  showCustomConfirm("Eliminar Artículo", `¿Seguro que deseas eliminar el artículo "${art.nombre}"?`, async (conf) => {
+    if (!conf) return;
+    try {
+      await remove(ref(db, `carta/${aid}`));
+      toast("Artículo eliminado");
+      cerrarDrawerEditArt();
+    } catch (e) {
+      toast("Error al eliminar artículo");
+    }
+  });
+}
+
+
+// --- TOAST NOTIFICATIONS ---
+function toast(msg) {
+  const t = document.getElementById("toast");
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => {
+    t.classList.remove("show");
+  }, 2200);
+}
+
+
+// --- MODAL PERSONALIZADO (ALERT/CONFIRM/PROMPT) ---
+let customModalCallback = null;
+
+function showCustomAlert(title, message) {
+  document.getElementById("custom-modal-title").textContent = title;
+  document.getElementById("custom-modal-message").textContent = message;
+  document.getElementById("custom-modal-input").style.display = "none";
+  document.getElementById("custom-modal-btn-cancel").style.display = "none";
+  
+  const okBtn = document.getElementById("custom-modal-btn-ok");
+  okBtn.textContent = "Aceptar";
+  okBtn.onclick = () => cerrarCustomModal();
+
+  document.getElementById("overlay-custom-modal").style.display = "block";
+  const modal = document.getElementById("custom-modal");
+  modal.style.display = "flex";
+  setTimeout(() => {
+    document.getElementById("overlay-custom-modal").classList.add("open");
+    modal.classList.add("open");
+  }, 20);
+}
+
+function showCustomConfirm(title, message, callback) {
+  customModalCallback = callback;
+  document.getElementById("custom-modal-title").textContent = title;
+  document.getElementById("custom-modal-message").textContent = message;
+  document.getElementById("custom-modal-input").style.display = "none";
+  
+  const cancelBtn = document.getElementById("custom-modal-btn-cancel");
+  cancelBtn.style.display = "block";
+  cancelBtn.onclick = () => {
+    cerrarCustomModal();
+    if (customModalCallback) customModalCallback(false);
+  };
+
+  const okBtn = document.getElementById("custom-modal-btn-ok");
+  okBtn.textContent = "Aceptar";
+  okBtn.onclick = () => {
+    cerrarCustomModal();
+    if (customModalCallback) customModalCallback(true);
+  };
+
+  document.getElementById("overlay-custom-modal").style.display = "block";
+  const modal = document.getElementById("custom-modal");
+  modal.style.display = "flex";
+  setTimeout(() => {
+    document.getElementById("overlay-custom-modal").classList.add("open");
+    modal.classList.add("open");
+  }, 20);
+}
+
+function showCustomPrompt(title, message, callback) {
+  customModalCallback = callback;
+  document.getElementById("custom-modal-title").textContent = title;
+  document.getElementById("custom-modal-message").textContent = message;
+  
+  const input = document.getElementById("custom-modal-input");
+  input.value = "";
+  input.style.display = "block";
+
+  const cancelBtn = document.getElementById("custom-modal-btn-cancel");
+  cancelBtn.style.display = "block";
+  cancelBtn.onclick = () => {
+    cerrarCustomModal();
+    if (customModalCallback) customModalCallback(null);
+  };
+
+  const okBtn = document.getElementById("custom-modal-btn-ok");
+  okBtn.textContent = "Aceptar";
+  okBtn.onclick = () => {
+    const val = input.value;
+    cerrarCustomModal();
+    if (customModalCallback) customModalCallback(val);
+  };
+
+  document.getElementById("overlay-custom-modal").style.display = "block";
+  const modal = document.getElementById("custom-modal");
+  modal.style.display = "flex";
+  setTimeout(() => {
+    document.getElementById("overlay-custom-modal").classList.add("open");
+    modal.classList.add("open");
+    input.focus();
+  }, 20);
+}
+
+function cerrarCustomModal() {
+  document.getElementById("overlay-custom-modal").classList.remove("open");
+  const modal = document.getElementById("custom-modal");
+  modal.classList.remove("open");
+  setTimeout(() => {
+    document.getElementById("overlay-custom-modal").style.display = "none";
+    modal.style.display = "none";
+  }, 200);
+}
+
+async function moverArt(id, catId, idx, dir) {
+  const arts = Object.entries(cartaData)
+    .filter(([_, p]) => p.catId === catId)
+    .sort((a, b) => (a[1].orden || 0) - (b[1].orden || 0) || (a[1].nombre || "").localeCompare(b[1].nombre || ""));
+
+  const idxDest = idx + dir;
+  if (idxDest < 0 || idxDest >= arts.length) return;
+
+  const updates = {};
+  arts.forEach(([aid], i) => { updates['carta/' + aid + '/orden'] = i; });
+  updates['carta/' + arts[idx][0] + '/orden'] = idxDest;
+  updates['carta/' + arts[idxDest][0] + '/orden'] = idx;
+  await update(ref(db), updates);
+}
+
+async function moverCat(id, idx, dir) {
+  const cats = Object.entries(categoriasData).sort((a, b) => {
+    return (a[1].orden ?? 999) - (b[1].orden ?? 999) || (a[1].nombre || "").localeCompare(b[1].nombre || "");
+  });
+
+  const idxDest = idx + dir;
+  if (idxDest < 0 || idxDest >= cats.length) return;
+
+  const updates = {};
+  cats.forEach(([cid], i) => { updates['categorias/' + cid + '/orden'] = i; });
+  updates['categorias/' + cats[idx][0] + '/orden'] = idxDest;
+  updates['categorias/' + cats[idxDest][0] + '/orden'] = idx;
+  await update(ref(db), updates);
+}
+
+window.alert = function(mensaje) {
+  showCustomAlert("Mensaje", mensaje);
+};
+
+window.moverArt = moverArt;
+window.moverCat = moverCat;
+
+// --- EXPOSICIÓN GLOBAL ---
+window.toggleAccordion = toggleAccordion;
+window.abrirDrawerEditCat = abrirDrawerEditCat;
+window.cerrarDrawerEditCat = cerrarDrawerEditCat;
+window.eliminarVarianteCategoria = eliminarVarianteCategoria;
+window.agregarVarianteCategoria = agregarVarianteCategoria;
+window.abrirModalNuevaCategoria = abrirModalNuevaCategoria;
+window.guardarCategoriaCarta = guardarCategoriaCarta;
+window.eliminarCategoriaCarta = eliminarCategoriaCarta;
+
+window.abrirDrawerEditArt = abrirDrawerEditArt;
+window.cerrarDrawerEditArt = cerrarDrawerEditArt;
+window.toggleComboPanelMovil = toggleComboPanelMovil;
+window.eliminarVarianteArticulo = eliminarVarianteArticulo;
+window.agregarVarianteArticulo = agregarVarianteArticulo;
+window.abrirModalNuevoArticulo = abrirModalNuevoArticulo;
+window.guardarArticuloCarta = guardarArticuloCarta;
+window.eliminarArticuloCarta = eliminarArticuloCarta;
+
+window.cerrarCustomModal = cerrarCustomModal;
+window.cerrarSesion = cerrarSesion;
+
+// --- INICIALIZAR ---
+init();
