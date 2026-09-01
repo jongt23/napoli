@@ -1247,6 +1247,7 @@
         <div id="ventas-por-dia" style="display: none;">
           <!-- Tabla de días -->
         </div>
+        <div id="facturas-completas-gerente"></div>
       </div>
 
       <!-- PESTAÑA: AUDITORÍA -->
@@ -1614,6 +1615,11 @@
 
   <!-- SCRIPTS PRINCIPALES -->
   <script type="module" src="gerentemovil.js"></script>
+  <script type="module">
+    import { db } from './firebase.js';
+    import { montarConsultaFacturas } from './facturas-completas.js';
+    montarConsultaFacturas({ getDb: () => db, elementId: 'facturas-completas-gerente' });
+  </script>
 
 </body>
 </html>
